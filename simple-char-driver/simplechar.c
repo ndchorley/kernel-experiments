@@ -22,7 +22,7 @@ struct file_operations simple_fops = {
   .open = simplechar_open
 };
 
-static int simple_init(void)
+static int simplechar_init(void)
 {
   int result = alloc_chrdev_region(&dev, 0, NUMBER_OF_DEVICES, "simplechar");
 
@@ -46,12 +46,12 @@ static int simple_init(void)
   return 0;
 }
 
-static void simple_exit(void)
+static void simplechar_exit(void)
 {
   unregister_chrdev_region(dev, NUMBER_OF_DEVICES);
 
   printk(KERN_ALERT "simplechar unloaded\n");
 }
 
-module_init(simple_init);
-module_exit(simple_exit);
+module_init(simplechar_init);
+module_exit(simplechar_exit);
