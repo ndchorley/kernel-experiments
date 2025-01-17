@@ -1,4 +1,5 @@
 #include <linux/cdev.h>
+#include <linux/debugfs.h>
 #include <linux/fs.h>
 #include <linux/init.h>
 #include <linux/module.h>
@@ -8,11 +9,15 @@ MODULE_LICENSE("Dual BSD/GPL");
 dev_t dev;
 const int NUMBER_OF_DEVICES = 1;
 
+u8 my_value = 36;
+
 struct cdev cdev;
 
 static int simplechar_open(struct inode *inode, struct file *file)
 {
   printk(KERN_ALERT "open called\n");
+
+  debugfs_create_u8("simplechar_value", 0444, NULL, &my_value);
 
   return 0;
 }
