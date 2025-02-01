@@ -1,3 +1,3 @@
 #!/bin/bash
 
-make -C ~/linux-$(uname -r) M=`pwd` modules
+make -C ~/linux-$(uname -r) M=$(pwd) modules
